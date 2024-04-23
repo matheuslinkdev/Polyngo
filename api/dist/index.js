@@ -9,6 +9,9 @@ const formacoes_1 = require("./data/formacoes");
 const idiomas_1 = require("./data/idiomas");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 5000;
+app.get("/", (req, res) => {
+    res.send("<h1>Bem-vindo à API Polyngo</h1><p>Esta é uma API para fornecer informações sobre idiomas e formações. Aqui estão alguns dos endpoints disponíveis:</p><ul><li>/idiomas - Obtém informações sobre idiomas</li><li>/idiomas/:id - Obtém informações de um idioma específico</li><li>/formacoes - Obtém informações sobre formações</li><li>/formacoes/:id - Obtém informações sobre uma formação específica</li></ul>");
+});
 // Rota para obter todas as formações
 app.get("/formacoes", (req, res) => {
     res.json(formacoes_1.formacoes);

@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    { "src": "/idiomas", "dest": "index.ts" },
+    { "src": "/formacoes", "dest": "index.ts" },
+    { "src": "/idiomas/(.*)", "dest": "index.ts" },
+    { "src": "/formacoes/(.*)", "dest": "index.ts" }
+  ]
+}
