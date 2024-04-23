@@ -1,17 +1,14 @@
-import express, { Request, Response } from "express";
+// idiomas.ts
 
-interface idiomasProps {
+export interface IdiomaProps {
   id: string;
   nome: string;
   descricao: string;
-  urlBandeira: string
-  alt: string
+  urlBandeira: string;
+  alt: string;
 }
 
-const app = express();
-const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 5000;
-
-const idiomas: idiomasProps[] = [
+export const idiomas: IdiomaProps[] = [
   {
     id: "ingles",
     nome: "Inglês",
@@ -45,25 +42,3 @@ const idiomas: idiomasProps[] = [
       "Desenvolva suas habilidades em alemão de maneira eficaz e autêntica. Nossos cursos oferecem uma combinação de instrução teórica e prática, permitindo que você se comunique com confiança em situações do dia a dia e explore a riqueza cultural da língua alemã.",
   },
 ];
-
-
-// Rota para obter todas as formações
-app.get("/idiomas", (req: Request, res: Response) => {
-  res.json(idiomas);
-});
-
-//Rota para obter detalhes de uma formação específica
-app.get("/idiomas/:id", (req: Request, res: Response) => {
-  const idFormacao = req.params.id;
-  const idioma = idiomas.find((i) => i.id === idFormacao);
-
-  if (!idioma) {
-    return res.status(404).json({ message: "Formação não encontrada" });
-  }
-
-  res.json(idioma);
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
