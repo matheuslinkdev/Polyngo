@@ -1,10 +1,43 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import HomePage from "./routes/HomePage.tsx";
+
+import Idiomas from "./routes/Principais/Idiomas.tsx";
+import IDIdioma from "./routes/Principais/IDIdioma.tsx";
+import Formacoes from "./routes/Principais/Formacoes.tsx";
+import ErrorPage from "./routes/error-Page.tsx";
+import IdFormacao from "./routes/Principais/IDFormacao.tsx";
+
+
+const router = createBrowserRouter([
+  {
+    path: "/*",
+    element: <HomePage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/idiomas",
+    element: <Idiomas />,
+  },
+  {
+    path: "/idiomas:id",
+    element: <IDIdioma />,
+  },
+  {
+    path: "/formacoes",
+    element: <Formacoes />,
+  },
+  {
+    path: "/formacoes:id",
+    element: <IdFormacao />,
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <RouterProvider router={router}/>
+  </React.StrictMode>
+);
