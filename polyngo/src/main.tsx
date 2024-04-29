@@ -10,7 +10,7 @@ import IDIdioma from "./routes/Principais/IDIdioma.tsx";
 import Formacoes from "./routes/Principais/Formacoes.tsx";
 import ErrorPage from "./routes/error-Page.tsx";
 import IdFormacao from "./routes/Principais/IDFormacao.tsx";
-
+import { Providers } from "./providers.tsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +38,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <Providers>
+      <RouterProvider router={router} />
+    </Providers>
   </React.StrictMode>
 );
