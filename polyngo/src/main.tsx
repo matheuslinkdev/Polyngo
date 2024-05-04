@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Providers } from "./providers.tsx";
-import Header from "./Components/Common/Header/index.tsx";
+import Header from "./Components/Common/Header/Header.tsx";
 import HomePage from "./routes/HomePage.tsx";
 import Idiomas from "./routes/Principais/Idiomas.tsx";
 import IDIdioma from "./routes/Principais/IDIdioma.tsx";

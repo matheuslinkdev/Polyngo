@@ -1,18 +1,18 @@
 import { Center } from "@chakra-ui/react";
-import React from "react";
 
 const ScreenBg = ({ children, bgImageUrl }) => {
   return (
     <Center
+      position="relative"
       bgImage={`url(${bgImageUrl})`}
-      backgroundAttachment="fixed"
       className="screen-background"
       w="100%"
-      h="100dvh"
+      minH="100dvh"
       backgroundSize="cover"
       backgroundPosition="center"
     >
-      <Center w="100%" h="100%" className="bg-overlay">
+      <div className="bg-overlay"></div> {/* Pseudoelemento para overlay */}
+      <Center w="100%" h="100%" className="content" py={5}>
         {children}
       </Center>
     </Center>

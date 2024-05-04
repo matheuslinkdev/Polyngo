@@ -7,7 +7,7 @@ export const theme = extendTheme({
         bgGradient: "linear(to-b, pink.700, pink.900)",
         backgroundAttachment: "fixed",
         minHeight: "100dvh",
-        maxWidth: "100%",
+        width: "100%",
       },
     },
   },

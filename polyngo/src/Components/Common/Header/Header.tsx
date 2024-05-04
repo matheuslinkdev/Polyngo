@@ -1,11 +1,10 @@
 import { Flex, Heading, Icon, List, ListItem } from "@chakra-ui/react";
 import {
   AiOutlineUserAdd,
-  AiOutlineUser,
   AiFillBackward,
   AiOutlineMenu,
 } from "react-icons/ai";
-import React, { useState } from "react";
+import { useState } from "react";
 import { links } from "./data";
 import { Link } from "react-router-dom";
 
@@ -37,7 +36,7 @@ const Header = () => {
         w={300}
         h="70dvh"
         borderRadius="0 0 10px 0"
-        zIndex={1}
+        zIndex={999}
         transition="all 0.3s ease-in-out"
         transform={sidebarOpen ? "translateX(0)" : "translateX(-100%)"}
       >

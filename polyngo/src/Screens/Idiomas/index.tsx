@@ -1,4 +1,3 @@
-import React from 'react'
 import ScreenBg from '../../Components/Custom/ScreenBg'
 
 const IdiomasScreen = () => {
