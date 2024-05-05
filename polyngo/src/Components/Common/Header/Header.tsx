@@ -65,8 +65,8 @@ const Header = () => {
           </List>
         )}
       </Flex>
-      <Heading size="lg" color="pink.950">
-        Polyngo
+      <Heading size="md" color="pink.950">
+        Polyngo Idiomas
       </Heading>
       <Icon
         as={AiOutlineUserAdd}
