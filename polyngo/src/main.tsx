@@ -6,11 +6,19 @@ import { Providers } from "./providers.tsx";
 import Header from "./Components/Common/Header/Header.tsx";
 import HomePage from "./routes/HomePage.tsx";
 import Idiomas from "./routes/Principais/Idiomas.tsx";
-import IDIdioma from "./routes/Principais/IDIdioma.tsx";
 import Formacoes from "./routes/Principais/Formacoes.tsx";
 import ErrorPage from "./routes/error-Page.tsx";
 import IdFormacao from "./routes/Principais/IDFormacao.tsx";
 import './index.css'
+import Perfil from "./routes/Basicas/Perfil.tsx";
+import Metodologia from "./routes/Basicas/Metodologia.tsx";
+import Matricula from "./routes/Basicas/Matricula.tsx";
+import Contato from "./routes/Basicas/Contato.tsx";
+import SaibaMais from "./routes/Basicas/SaibaMais.tsx";
+import Suporte from "./routes/Basicas/Suporte.tsx";
+import Institucional from "./routes/Basicas/Institucional.tsx";
+import Bolsas from "./routes/Basicas/Bolsas.tsx";
+import Inclusao from "./routes/Basicas/Inclusao.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -20,9 +28,18 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/idiomas" element={<Idiomas />} />
-          <Route path="/idiomas/:id" element={<IDIdioma />} />
           <Route path="/formacoes" element={<Formacoes />} />
           <Route path="/formacoes/:id" element={<IdFormacao />} />
+
+          <Route path="/perfil" element={<Perfil/>}/>
+          <Route path="/metodologia" element={<Metodologia/>}/>
+          <Route path="/matricula" element={<Matricula/>}/>
+          <Route path="/contato" element={<Contato/>}/>
+          <Route path="/saibamais" element={<SaibaMais/>}/>
+          <Route path="/suporte" element={<Suporte/>}/>
+          <Route path="/institucional" element={<Institucional/>}/>
+          <Route path="/bolsas" element={<Bolsas/>}/>
+          <Route path="/inclusao" element={<Inclusao/>}/>
           <Route path="*" element={<ErrorPage />} />
         </Routes>
     </Providers>

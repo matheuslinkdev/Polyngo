@@ -9,11 +9,7 @@ export const links = [
     }, 
     {
         ref: "Formações",
-        href: "/formações"
-    }, 
-    {
-        ref: "Planos",
-        href: "/planos"
+        href: "/formacoes"
     }, 
     {
         ref: "Metodologia",
@@ -21,7 +17,7 @@ export const links = [
     }, 
     {
         ref: "Matrícula",
-        href: "/matrícula"
+        href: "/matricula"
     }, 
     {
         ref: "Contato",
@@ -45,6 +41,6 @@ export const links = [
     }, 
     {
         ref: "Inclusão",
-        href: "/inclusão"
+        href: "/inclusao"
     }, 
 ]

@@ -1,14 +1,12 @@
-import { Center, Flex } from '@chakra-ui/react'
-import React from 'react'
-import ScreenBg from '../Components/Custom/ScreenBg'
-import HomeScreen from '../Screens/HomePage';
+import { Flex } from '@chakra-ui/react'
+import HomeScreenContent from '../Screens/HomeContent';
 import Introducao from '../Screens/Introducao';
 import IdiomasScreen from '../Screens/Idiomas';
 
 const HomePage = () => {
   return (
     <Flex flexDir="column" justifyContent="center" alignItems="center" maxW="100dvw" h="100%">
-      <HomeScreen/>
+      <HomeScreenContent/>
       <Introducao/>
       <IdiomasScreen/>
     </Flex>

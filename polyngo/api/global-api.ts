@@ -12,16 +12,6 @@ export async function fetchIdiomas() {
   }
 }
 
-export async function fetchIdiomaById(id: string) {
-  try {
-    const url = `${baseURL}/idiomas/${id}`;
-    const response = await axios.get(url);
-    return response.data;
-  } catch (error) {
-    throw new Error(`Erro ao buscar informações do idioma com ID ${id}`);
-  }
-}
-
 export async function fetchFormacoes() {
   try {
     const url = `${baseURL}/formacoes`;

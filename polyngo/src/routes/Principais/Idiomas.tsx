@@ -1,8 +1,10 @@
-import React from 'react'
+import IdiomasScreen from '../../Screens/Idiomas'
 
 const Idiomas = () => {
   return (
-    <div>Idiomas</div>
+    <>
+      <IdiomasScreen/>
+    </>
   )
 }
 

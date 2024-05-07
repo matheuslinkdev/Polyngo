@@ -23,7 +23,7 @@ const IdiomasScreen = () => {
           <Heading color="common.100" fontWeight={400} size="lg">
             Ficou interessado(a) ?
           </Heading>
-          <RedirectBtn label="Matrícula" />
+          <RedirectBtn label="Formações" path="/formacoes"/>
         </Center>
       </Center>
     </ScreenBg>

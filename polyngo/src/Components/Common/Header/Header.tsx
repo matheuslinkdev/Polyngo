@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <Flex
       w="100%"
-      h="6dvh"
+      h="10dvh"
       bg="pink.600"
       justifyContent="space-between"
       alignItems="center"
@@ -23,7 +23,7 @@ const Header = () => {
     >
       <Icon
         as={sidebarOpen ? AiFillBackward : AiOutlineMenu}
-        fontSize={26}
+        fontSize={32}
         onClick={() => setSidebarOpen(!sidebarOpen)}
         cursor="pointer"
         color="pink.950"
@@ -31,10 +31,10 @@ const Header = () => {
       <Flex
         position="absolute"
         left={0}
-        top="6dvh"
+        top="10dvh"
         bg="pink.700"
         w={300}
-        h="70dvh"
+        h="90dvh"
         borderRadius="0 0 10px 0"
         zIndex={999}
         transition="all 0.3s ease-in-out"
@@ -55,7 +55,7 @@ const Header = () => {
                     color="pink.950"
                     listStyleType="none"
                     m="10px auto"
-                    _hover={{color: "common.950"}}
+                    _hover={{ color: "common.950" }}
                   >
                     {link.ref}
                   </ListItem>
@@ -65,15 +65,28 @@ const Header = () => {
           </List>
         )}
       </Flex>
-      <Heading size="md" color="pink.950">
-        Polyngo Idiomas
+      <Heading size="lg" color="pink.950" fontWeight={400}>
+        <Link to="/">Polyngo Idiomas</Link>
       </Heading>
-      <Icon
-        as={AiOutlineUserAdd}
-        fontSize={26}
-        cursor="pointer"
-        color="pink.950"
-      />
+      <Link
+        to="perfil"
+        style={{
+          border: "1px solid var(--chakra-colors-pink-950)",
+          height: "36px",
+          width: "36px",
+          borderRadius: "50%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Icon
+          as={AiOutlineUserAdd}
+          fontSize={30}
+          cursor="pointer"
+          color="pink.950"
+        />
+      </Link>
     </Flex>
   );
 };

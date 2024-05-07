@@ -1,9 +1,8 @@
-import React from "react";
 import ScreenBg from "../../Components/Custom/ScreenBg";
 import { Box, Flex, Image, Spacer, Text } from "@chakra-ui/react";
 import RedirectBtn from "../../Components/Buttons/RedirectBtn";
 
-const HomeScreen = () => {
+const HomeScreenContent = () => {
   return (
     <ScreenBg bgImageUrl="src/imgs/pexels-olly-3769138.jpg">
       <Flex width="90%" flexWrap="wrap" gap={20}>
@@ -13,11 +12,11 @@ const HomeScreen = () => {
           </Text>
           <Text fontSize="2xl" fontWeight="600" color="common.50">
             E o melhor,{" "}
-            <span style={{ color: "var(--chakra-colors-pink-600)" }}>
+            <span style={{ color: "var(--chakra-colors-pink-600)", fontSize: "1.8rem" }}>
               de onde quiser!
             </span>
           </Text>
-          <RedirectBtn label="Saiba Mais"/>
+          <RedirectBtn label="Saiba Mais" path="/saibamais"/>
         </Box>
         <Spacer />
         <Box
@@ -39,4 +38,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default HomeScreenContent;
