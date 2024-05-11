@@ -5,7 +5,7 @@ import RedirectBtn from "../../Components/Buttons/RedirectBtn";
 
 const IdiomasScreen = () => {
   return (
-    <ScreenBg bgImageUrl="src/imgs/pexels-nurseryart-346885.jpg">
+    <ScreenBg bgImageUrl="/imgs/pexels-nurseryart-346885.jpg">
       <Center
         display="flex"
         flexDir="column"

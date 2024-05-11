@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { fetchFormacoes } from "../../../api/global-api";
 import { Button, Center, Flex, Heading, Icon, Text } from "@chakra-ui/react";
 import { MdNavigateNext } from "react-icons/md";
+import { FormacaoProps } from "../../../types/global-types";
+
 
 const CardsFormacoes = () => {
-  const [dados, setDados] = useState([]);
+  const [dados, setDados] = useState<FormacaoProps[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +22,7 @@ const CardsFormacoes = () => {
     fetchData();
   }, []);
 
-  const definirBackground = (formacao) => {
+  const definirBackground = (formacao: FormacaoProps) => {
     let backgroundFormacao;
 
     if (formacao.id === "formacaobasica") {
@@ -79,7 +81,11 @@ const CardsFormacoes = () => {
               <Text fontWeight={500} mt="-1">
                 Saiba Mais
               </Text>
-              <Icon as={MdNavigateNext} fontSize={22} style={{color: "#fff"}}/>
+              <Icon
+                as={MdNavigateNext}
+                fontSize={22}
+                style={{ color: "#fff" }}
+              />
             </Button>
           </Flex>
         );

@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { fetchIdiomas } from "../../../api/global-api.ts";
 import { Center, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import { IdiomaProps } from "../../../types/global-types.ts";
 
 const CardsIdiomas = () => {
-  const [idiomas, setIdiomas] = useState([]);
+  const [idiomas, setIdiomas] = useState<IdiomaProps[]>([]);
 
   useEffect(() => {
     const getIdiomasData = async () => {
       try {
         const dadosIdiomas = await fetchIdiomas();
         setIdiomas(dadosIdiomas);
-        console.log(idiomas);
       } catch (err) {
         console.log(err, "Erro ao carregar dados de idiomas");
       }

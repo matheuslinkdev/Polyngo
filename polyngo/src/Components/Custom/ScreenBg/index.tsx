@@ -1,6 +1,7 @@
 import { Center } from "@chakra-ui/react";
+import { ScreenBgProps } from '../../../../types/global-types'
 
-const ScreenBg = ({ children, bgImageUrl }) => {
+const ScreenBg = ({ children, bgImageUrl }: ScreenBgProps) => {
   return (
     <Center
       position="relative"

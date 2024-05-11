@@ -4,7 +4,7 @@ import CardsVantagens from "../../Components/Fragments/CardsVantagens";
 
 const Introducao = () => {
   return (
-    <ScreenBg bgImageUrl="src/imgs/pexels-katerina-holmes-5905700.jpg">
+    <ScreenBg bgImageUrl="/imgs/pexels-katerina-holmes-5905700.jpg">
       <Flex
         justifyContent="center"
         alignItems="center"

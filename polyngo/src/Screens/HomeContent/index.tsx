@@ -4,7 +4,7 @@ import RedirectBtn from "../../Components/Buttons/RedirectBtn";
 
 const HomeScreenContent = () => {
   return (
-    <ScreenBg bgImageUrl="src/imgs/pexels-olly-3769138.jpg">
+    <ScreenBg bgImageUrl="/imgs/pexels-olly-3769138.jpg">
       <Flex width="90%" flexWrap="wrap" gap={20}>
         <Box display="flex" flexDir="column" justifyContent="center" w={400}>
           <Text fontSize="2xl" fontWeight="600" color="common.50">
@@ -27,7 +27,7 @@ const HomeScreenContent = () => {
           borderRadius={15}
         >
           <Image
-            src="src/imgs/student.webp"
+            src="/imgs/student.webp"
             bottom={0}
             w={350}
             position="absolute"
