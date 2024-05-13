@@ -1,17 +1,59 @@
 // index.ts
+import dotenv from "dotenv";
+dotenv.config();
 
 import express, { Request, Response } from "express";
 import { formacoes } from "./data/formacoes";
 import { idiomas } from "./data/idiomas";
+import mongoose from "mongoose";
+import cors from "cors";
+import UserModel from "./models/userModel.ts";
+
+const USERNAME = process.env.DB_USERNAME;
+const PASSWORD = process.env.DB_PASSWORD;
 
 const app = express();
-const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 5000;
+app.use(express.json());
+app.use(cors());
+mongoose.connect(
+  `mongodb+srv://${USERNAME}:${PASSWORD}@cluster0.tbx0dii.mongodb.net/polyngo?retryWrites=true&w=majority&appName=Cluster0`
+);
+const PORT = process.env.PORT;
 
 app.get("/", (req: Request, res: Response) => {
   res.send(
     "<h1>Bem-vindo à API Polyngo</h1><p>Esta é uma API para fornecer informações sobre idiomas e formações. Aqui estão alguns dos endpoints disponíveis:</p><ul><li>/idiomas - Obtém informações sobre idiomas</li><li>/idiomas/:id - Obtém informações de um idioma específico</li><li>/formacoes - Obtém informações sobre formações</li><li>/formacoes/:id - Obtém informações sobre uma formação específica</li></ul>"
   );
 });
+
+// REGISTER & LOGIN // !!!!!!!!!!!!!!!!!!
+
+app.post("/register", (req, res) => {
+  UserModel.create(req.body)
+    .then((users) => res.json(users))
+    .catch((err) => console.error(err));
+});
+app.post("/login", (req, res) => {
+  const { email, password } = req.body
+  UserModel.findOne({ email: email})
+  .then(user =>{
+    if(user){
+      if(user.password === password){
+        res.json("Sucesso no Login")
+      } else{
+        res.json("Falha no Login, senha inválida")
+      }
+    } else{
+      res.json("usuário não encontrado !")
+    }
+  })
+});
+
+
+app.get("/register", (req, res) => {
+  res.send("Pagina de registro")
+});
+///////////
 
 // Rota para obter todas as formações
 app.get("/formacoes", (req: Request, res: Response) => {
