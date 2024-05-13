@@ -1,12 +1,12 @@
 import { Flex, Heading, Icon, List, ListItem } from "@chakra-ui/react";
 import {
-  AiOutlineUserAdd,
   AiFillBackward,
   AiOutlineMenu,
 } from "react-icons/ai";
 import { useState } from "react";
 import { links } from "./data";
 import { Link } from "react-router-dom";
+import UserButtons from "../../Buttons/UserButtons";
 
 const Header = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -68,7 +68,8 @@ const Header = () => {
       <Heading size="lg" color="pink.950" fontWeight={400}>
         <Link to="/">Polyngo Idiomas</Link>
       </Heading>
-      <Link
+      <UserButtons/>
+      {/* <Link
         to="perfil"
         style={{
           border: "1px solid var(--chakra-colors-pink-950)",
@@ -80,13 +81,13 @@ const Header = () => {
           justifyContent: "center",
         }}
       >
-        <Icon
+         <Icon
           as={AiOutlineUserAdd}
           fontSize={30}
           cursor="pointer"
           color="pink.950"
         />
-      </Link>
+      </Link> */}
     </Flex>
   );
 };

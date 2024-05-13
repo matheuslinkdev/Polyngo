@@ -19,6 +19,9 @@ import Suporte from "./routes/Basicas/Suporte.tsx";
 import Institucional from "./routes/Basicas/Institucional.tsx";
 import Bolsas from "./routes/Basicas/Bolsas.tsx";
 import Inclusao from "./routes/Basicas/Inclusao.tsx";
+import AreaAluno from "./routes/Basicas/AreaAluno.tsx";
+import Login from "./routes/Principais/Login.tsx";
+import Registro from "./routes/Principais/Registro.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -30,6 +33,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="/idiomas" element={<Idiomas />} />
           <Route path="/formacoes" element={<Formacoes />} />
           <Route path="/formacoes/:id" element={<IdFormacao />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registro" element={<Registro />} />
+          <Route path="/areadoaluno" element={<AreaAluno />} />
 
           <Route path="/perfil" element={<Perfil/>}/>
           <Route path="/metodologia" element={<Metodologia/>}/>

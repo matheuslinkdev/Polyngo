@@ -8,6 +8,10 @@ export const links = [
         href: "/idiomas"
     }, 
     {
+        ref: "Área do Aluno",
+        href: "/areadoaluno"
+    }, 
+    {
         ref: "Formações",
         href: "/formacoes"
     }, 
