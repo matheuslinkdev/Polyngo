@@ -8,36 +8,25 @@ import {
   InputRightElement,
   Text,
 } from "@chakra-ui/react";
-import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthContext";
 
 const LoginForm = () => {
   const [isHidden, setIsHidden] = useState(true);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const navigate = useNavigate();
+  const authContext = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:5000/login", { email, password })
-      .then((result) => {
-        if (result.status === 200) {
-          navigate("/areadoaluno");
-        }
-        console.log(result);
-      })
-      .catch((err) => console.error(err));
+    authContext?.login(email, password);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <FormControl w={400} maxW="95dvw" mt={10} color="common.100">
-
         <FormLabel mt={5}>Digite seu Email de acesso:</FormLabel>
         <Input
           type="email"
@@ -71,7 +60,7 @@ const LoginForm = () => {
           </InputRightElement>
         </InputGroup>
         <Text mt={5}>
-          Não possui uma conta ?{" "}
+          Não possui uma conta?{" "}
           <Link
             to="/registro"
             style={{

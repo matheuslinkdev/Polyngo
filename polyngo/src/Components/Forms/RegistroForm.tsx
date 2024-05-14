@@ -8,37 +8,21 @@ import {
   InputRightElement,
   Text,
 } from "@chakra-ui/react";
-import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthContext";
 
 const RegistroForm = () => {
   const [isHidden, setIsHidden] = useState(true);
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const navigate = useNavigate()
-
-  const cleanStates = () => {
-    setName("");
-    setEmail("");
-    setPassword("");
-  };
+  const authContext = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:5000/register", { name, email, password })
-      .then((result) => {
-        console.log(result);
-        navigate("/login")
-        
-      })
-      .catch((err) => console.error(err));
+    authContext?.signup(name, email, password);
   };
 
   return (
@@ -86,7 +70,7 @@ const RegistroForm = () => {
           </InputRightElement>
         </InputGroup>
         <Text mt={5}>
-          Já possui uma conta ?{" "}
+          Já possui uma conta?{" "}
           <Link
             to="/login"
             style={{

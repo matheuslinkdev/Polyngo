@@ -1,50 +1,58 @@
-export const links = [
+import { useAuth } from "../../../Context/AuthContext";
+
+export const getLinks = () => {
+  const { isAuthenticated } = useAuth();
+
+  const links = [
     {
-        ref: "Home",
-        href: "/"
-    }, 
+      ref: "Home",
+      href: "/",
+    },
     {
-        ref: "Idiomas",
-        href: "/idiomas"
-    }, 
+      ref: "Idiomas",
+      href: "/idiomas",
+    },
+    isAuthenticated && {
+      ref: "Área do Aluno",
+      href: "/areadoaluno",
+    },
     {
-        ref: "Área do Aluno",
-        href: "/areadoaluno"
-    }, 
+      ref: "Formações",
+      href: "/formacoes",
+    },
     {
-        ref: "Formações",
-        href: "/formacoes"
-    }, 
+      ref: "Metodologia",
+      href: "/metodologia",
+    },
     {
-        ref: "Metodologia",
-        href: "/metodologia"
-    }, 
+      ref: "Matrícula",
+      href: "/matricula",
+    },
     {
-        ref: "Matrícula",
-        href: "/matricula"
-    }, 
+      ref: "Contato",
+      href: "/contato",
+    },
     {
-        ref: "Contato",
-        href: "/contato"
-    }, 
+      ref: "Saiba Mais",
+      href: "/saibamais",
+    },
     {
-        ref: "Saiba Mais",
-        href: "/saibamais"
-    }, 
+      ref: "Suporte",
+      href: "/suporte",
+    },
     {
-        ref: "Suporte",
-        href: "/suporte"
-    }, 
+      ref: "Institucional",
+      href: "/institucional",
+    },
     {
-        ref: "Institucional",
-        href: "/institucional"
-    }, 
+      ref: "Bolsas",
+      href: "/bolsas",
+    },
     {
-        ref: "Bolsas",
-        href: "/bolsas"
-    }, 
-    {
-        ref: "Inclusão",
-        href: "/inclusao"
-    }, 
-]
+      ref: "Inclusão",
+      href: "/inclusao",
+    },
+  ];
+
+  return links.filter(Boolean);
+};
