@@ -8,6 +8,7 @@ const Registro = () => {
       justifyContent="center"
       alignItems="center"
       maxW="100dvw"
+      h="80dvh"
     >
       <RegistroForm />
     </Flex>

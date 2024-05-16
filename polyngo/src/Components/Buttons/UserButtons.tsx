@@ -6,10 +6,10 @@ const UserButtons = () => {
   return (
     <ButtonGroup>
       <Link to="/login">
-        <Button bgColor="pink.400">Login</Button>
+        <Button bgColor="pink.500" _hover={{bgColor: "pink.700"}}>Login</Button>
       </Link>
       <Link to="/registro">
-        <Button bgColor="pink.500">Registro</Button>
+        <Button bgColor="pink.600" _hover={{bgColor: "pink.700"}}>Registro</Button>
       </Link>
     </ButtonGroup>
   );

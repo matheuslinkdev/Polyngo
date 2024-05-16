@@ -9,6 +9,7 @@ interface AuthContextProps {
   signup: (name: string, email: string, password: string) => void;
   logout: () => void;
   isAuthenticated: boolean;
+  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
   user: any;
 }
 
@@ -18,6 +19,7 @@ export const AuthContext = createContext<AuthContextProps>({
   signup: () => {},
   logout: () => {},
   isAuthenticated: false,
+  setIsAuthenticated: () => {},
   user: null,
 });
 
@@ -30,28 +32,18 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
 
-  const login = (email: string, password: string) => {
-    axios
-      .post("http://localhost:5000/login", { email, password })
-      .then((result) => {
-        if (result.status === 200) {
-          setUser(result.data.user);
-          setIsAuthenticated(true);
-          navigate("/areadoaluno");
-        }
-      })
-      .catch((err) => console.error(err));
-  };
-
   const signup = (name: string, email: string, password: string) => {
     axios
       .post("http://localhost:5000/register", { name, email, password })
       .then((result) => {
         setUser(result.data.user);
+        console.log(result);
         navigate("/login");
       })
       .catch((err) => console.error(err));
   };
+
+
 
   const logout = () => {
     setUser(null);
@@ -61,7 +53,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ login, signup, logout, isAuthenticated, user }}
+      value={{ signup, logout, isAuthenticated, setIsAuthenticated, user }}
     >
       {children}
     </AuthContext.Provider>

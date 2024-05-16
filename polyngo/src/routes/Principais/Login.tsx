@@ -6,7 +6,7 @@ const Login = () => {
   
 
   return (
-    <Flex flexDir="column" justifyContent="center" alignItems="center" maxW="100dvw">
+    <Flex flexDir="column" justifyContent="center" alignItems="center" maxW="100dvw" h="80dvh">
      <LoginForm/>
     </Flex>
   );

@@ -1,3 +1,4 @@
+// LoginForm.tsx
 import {
   Button,
   FormControl,
@@ -8,24 +9,49 @@ import {
   InputRightElement,
   Text,
 } from "@chakra-ui/react";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../Context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useAuth } from "../../Context/AuthContext";
 
 const LoginForm = () => {
   const [isHidden, setIsHidden] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const authContext = useContext(AuthContext);
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const { setIsAuthenticated } = useAuth();
+
+  async function submitLogin(e) {
     e.preventDefault();
-    authContext?.login(email, password);
-  };
+
+    try {
+      await axios
+        .post("http://localhost:5000/login", {
+          email,
+          password,
+        })
+        .then((res) => {
+          if (res.data == "exist") {
+            alert("Login Success");
+            setIsAuthenticated(true);
+            navigate("/areadoaluno", { state: { id: email } });
+          } else if (res.data == "notexist") {
+            alert("User have not sign up");
+          }
+        })
+        .catch((e) => {
+          alert("wrong details");
+          console.log(e);
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitLogin}>
       <FormControl w={400} maxW="95dvw" mt={10} color="common.100">
         <FormLabel mt={5}>Digite seu Email de acesso:</FormLabel>
         <Input

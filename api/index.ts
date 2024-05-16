@@ -28,30 +28,46 @@ app.get("/", (req: Request, res: Response) => {
 
 // REGISTER & LOGIN // !!!!!!!!!!!!!!!!!!
 
-app.post("/register", (req, res) => {
-  UserModel.create(req.body)
-    .then((users) => res.json(users))
-    .catch((err) => console.error(err));
-});
-app.post("/login", (req, res) => {
-  const { email, password } = req.body
-  UserModel.findOne({ email: email})
-  .then(user =>{
-    if(user){
-      if(user.password === password){
-        res.json("Sucesso no Login")
-      } else{
-        res.json("Falha no Login, senha inválida")
-      }
-    } else{
-      res.json("usuário não encontrado !")
+app.post("/signup", async (req, res) => {
+  const { email, password } = req.body;
+
+  const data = {
+    email: email,
+    password: password,
+  };
+
+  try {
+    const check = await UserModel.findOne({ email: email });
+
+    if (check) {
+      res.json("exist");
+    } else {
+      res.json("notexist");
+      await UserModel.insertMany([data]);
     }
-  })
+  } catch (e) {
+    res.json("fail");
+  }
 });
 
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const check = await UserModel.findOne({ email: email });
+
+    if (check) {
+      res.json("exist");
+    } else {
+      res.json("notexist");
+    }
+  } catch (e) {
+    res.json("fail");
+  }
+});
 
 app.get("/register", (req, res) => {
-  res.send("Pagina de registro")
+  res.send("Pagina de registro");
 });
 ///////////
 

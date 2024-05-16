@@ -1,17 +1,14 @@
-import { Button, Flex, Heading, Icon, List, ListItem } from "@chakra-ui/react";
-import {
-  AiFillBackward,
-  AiOutlineMenu,
-  AiOutlineUserAdd,
-} from "react-icons/ai";
+import { Box, Flex, Heading, Icon, List, ListItem } from "@chakra-ui/react";
+import { AiFillBackward, AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
-import { getLinks } from "./data"; // Import getLinks instead of links
+import { getLinks } from "./data";
 import { Link } from "react-router-dom";
 import UserButtons from "../../Buttons/UserButtons";
 import { useAuth } from "../../../Context/AuthContext";
+import ModalPerfil from "../../User/ModalPerfil";
 
 const Header = () => {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const links = getLinks(); // Call getLinks to get the array of links
 
@@ -70,32 +67,15 @@ const Header = () => {
       <Heading size="lg" color="pink.950" fontWeight={400}>
         <Link to="/">Polyngo Idiomas</Link>
       </Heading>
-      {isAuthenticated ? (
-        <>
-          <Link
-            to="perfil"
-            style={{
-              border: "1px solid var(--chakra-colors-pink-950)",
-              height: "36px",
-              width: "36px",
-              borderRadius: "50%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Icon
-              as={AiOutlineUserAdd}
-              fontSize={30}
-              cursor="pointer"
-              color="pink.950"
-            />
-          </Link>
-          <Button onClick={logout}>Sair</Button>
-        </>
-      ) : (
-        <UserButtons />
-      )}
+      <Box display="flex">
+        {isAuthenticated ? (
+          <>
+            <ModalPerfil />
+          </>
+        ) : (
+          <UserButtons />
+        )}
+      </Box>
     </Flex>
   );
 };

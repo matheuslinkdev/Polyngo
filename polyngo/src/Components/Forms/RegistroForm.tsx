@@ -10,23 +10,46 @@ import {
 } from "@chakra-ui/react";
 import { useState, useContext } from "react";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
+import axios from "axios";
 
 const RegistroForm = () => {
   const [isHidden, setIsHidden] = useState(true);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const authContext = useContext(AuthContext);
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate()
+
+  async function submitRegistro(e) {
     e.preventDefault();
-    authContext?.signup(name, email, password);
-  };
+
+    try {
+      await axios
+        .post("http://localhost:5000/signup", {
+          email,
+          password,
+          name
+        })
+        .then((res) => {
+          if (res.data == "exist") {
+            alert("User already exists");
+          } else if (res.data == "notexist") {
+            navigate("/login", { state: { id: email } });
+          }
+        })
+        .catch((e) => {
+          alert("wrong details");
+          console.log(e);
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitRegistro}>
       <FormControl w={400} maxW="95dvw" mt={10} color="common.100">
         <FormLabel mt={5}>Digite seu Nome:</FormLabel>
         <Input

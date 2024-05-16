@@ -25,8 +25,8 @@ import Registro from "./routes/Principais/Registro.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-      <Router>
-    <Providers>
+    <Router>
+      <Providers>
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -36,19 +36,20 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
           <Route path="/areadoaluno" element={<AreaAluno />} />
+          
 
-          <Route path="/perfil" element={<Perfil/>}/>
-          <Route path="/metodologia" element={<Metodologia/>}/>
-          <Route path="/matricula" element={<Matricula/>}/>
-          <Route path="/contato" element={<Contato/>}/>
-          <Route path="/saibamais" element={<SaibaMais/>}/>
-          <Route path="/suporte" element={<Suporte/>}/>
-          <Route path="/institucional" element={<Institucional/>}/>
-          <Route path="/bolsas" element={<Bolsas/>}/>
-          <Route path="/inclusao" element={<Inclusao/>}/>
+          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/metodologia" element={<Metodologia />} />
+          <Route path="/matricula" element={<Matricula />} />
+          <Route path="/contato" element={<Contato />} />
+          <Route path="/saibamais" element={<SaibaMais />} />
+          <Route path="/suporte" element={<Suporte />} />
+          <Route path="/institucional" element={<Institucional />} />
+          <Route path="/bolsas" element={<Bolsas />} />
+          <Route path="/inclusao" element={<Inclusao />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
-    </Providers>
-      </Router>
+      </Providers>
+    </Router>
   </React.StrictMode>
 );
