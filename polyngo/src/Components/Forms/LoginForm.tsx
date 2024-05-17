@@ -1,4 +1,4 @@
-// LoginForm.tsx
+import React, { useState, FormEvent } from "react";
 import {
   Button,
   FormControl,
@@ -8,45 +8,44 @@ import {
   InputGroup,
   InputRightElement,
   Text,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../Context/AuthContext";
 
-const LoginForm = () => {
+const LoginForm: React.FC = () => {
   const [isHidden, setIsHidden] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
-  const { setIsAuthenticated } = useAuth();
+  const { setIsAuthenticated, setUser } = useAuth();
 
-  async function submitLogin(e) {
+  async function submitLogin(e: FormEvent) {
     e.preventDefault();
 
     try {
-      await axios
-        .post("http://localhost:5000/login", {
-          email,
-          password,
-        })
-        .then((res) => {
-          if (res.data == "exist") {
-            alert("Login Success");
-            setIsAuthenticated(true);
-            navigate("/areadoaluno", { state: { id: email } });
-          } else if (res.data == "notexist") {
-            alert("User have not sign up");
-          }
-        })
-        .catch((e) => {
-          alert("wrong details");
-          console.log(e);
-        });
-    } catch (e) {
-      console.log(e);
+      const res = await axios.post("http://localhost:5000/login", {
+        email,
+        password,
+      });
+
+      if (res.data === "exist") {
+        setErrorMessage("");
+        setIsAuthenticated(true);
+        setUser({ email, password });
+        navigate("/areadoaluno", { state: { id: email } });
+      }
+    } catch (error) {
+      if (error.response) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage("Erro de rede. Tente novamente.");
+      }
     }
   }
 
@@ -85,6 +84,12 @@ const LoginForm = () => {
             />
           </InputRightElement>
         </InputGroup>
+        {errorMessage && (
+          <Alert status="error" mt={4} bgColor="red">
+            <AlertIcon />
+            {errorMessage}
+          </Alert>
+        )}
         <Text mt={5}>
           Não possui uma conta?{" "}
           <Link

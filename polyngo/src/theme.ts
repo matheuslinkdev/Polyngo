@@ -45,7 +45,7 @@ export const theme = extendTheme({
       transparent: {
         "100": "#b0045433",
         "200": "#92094922",
-        "300": "#5b0028",
+        "300": "#5b002877",
       },
     },
   },

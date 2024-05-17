@@ -54,17 +54,26 @@ app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const check = await UserModel.findOne({ email: email });
-
-    if (check) {
-      res.json("exist");
-    } else {
-      res.json("notexist");
+    const user = await UserModel.findOne({ email: email });
+    if (!user) {
+      return res
+        .status(404)
+        .json({ error: "notexist", message: "Usuário não está cadastrado." });
     }
+
+    const isPasswordCorrect = user.password === password; 
+    if (!isPasswordCorrect) {
+      return res
+        .status(401)
+        .json({ error: "incorrect", message: "Senha incorreta." });
+    }
+
+    res.json("exist");
   } catch (e) {
-    res.json("fail");
+    res.status(500).json({ error: "fail", message: "Erro no servidor." });
   }
 });
+
 
 app.get("/register", (req, res) => {
   res.send("Pagina de registro");

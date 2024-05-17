@@ -1,8 +1,10 @@
+import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import { useAuth } from "../../Context/AuthContext";
 import { Navigate } from "react-router-dom";
+import EmAndamento from "../../Components/User/EmAndamento";
 
 const AreaAluno = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
   // Verifica se o usuário está autenticado
   if (!isAuthenticated) {
@@ -12,10 +14,23 @@ const AreaAluno = () => {
 
   // Se o usuário estiver autenticado, exibe o conteúdo da área do aluno
   return (
-    <div>
-      <h2>Área do Aluno</h2>
-      {/* Adicione aqui o conteúdo específico da área do aluno */}
-    </div>
+    <Flex
+      flexDir="column"
+      justifyContent="center"
+      alignItems="center"
+      maxW="100dvw"
+      minH="80dvh"
+    >
+      <Center bgColor="pink.transparent.300" minH="70dvh" w="70dvw" borderRadius="25px" flexDir="column" justifyContent="space-evenly">
+        <Box>
+          <Heading size="md" fontWeight={400}>
+            Seja bem vindo novamente {user.email}
+          </Heading>
+          <Text>Acompanhe aqui seu progresso nas formações em andamento !</Text>
+        </Box>
+        <EmAndamento />
+      </Center>
+    </Flex>
   );
 };
 
