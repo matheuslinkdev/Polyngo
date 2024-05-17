@@ -1,25 +1,24 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import express, { Request, Response } from "express";
-import { formacoes } from "./data/formacoes";
-import { idiomas } from "./data/idiomas";
+import express from "express";
+import { formacoes } from "./data/formacoes.js";
+import { idiomas } from "./data/idiomas.js";
 import mongoose from "mongoose";
 import cors from "cors";
-import UserModel from "./models/userModel.ts";
+import UserModel from "./models/userModel.js";
 
-const USERNAME = process.env.DB_USERNAME;
-const PASSWORD = process.env.DB_PASSWORD;
+const CONNECTION_STRING = process.env.DB_CONNECTION_STRING
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 mongoose.connect(
-  `mongodb+srv://${USERNAME}:${PASSWORD}@cluster0.tbx0dii.mongodb.net/polyngo?retryWrites=true&w=majority&appName=Cluster0`
+  CONNECTION_STRING
 );
 const PORT = process.env.PORT;
 
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (req, res) => {
   res.send(
     "<h1>Bem-vindo à API Polyngo</h1><p>Esta é uma API para fornecer informações sobre idiomas e formações. Aqui estão alguns dos endpoints disponíveis:</p><ul><li>/idiomas - Obtém informações sobre idiomas</li><li>/idiomas/:id - Obtém informações de um idioma específico</li><li>/formacoes - Obtém informações sobre formações</li><li>/formacoes/:id - Obtém informações sobre uma formação específica</li></ul>"
   );
@@ -122,12 +121,12 @@ app.get("/register", (req, res) => {
 });
 
 // Rota para obter todas as formações
-app.get("/formacoes", (req: Request, res: Response) => {
+app.get("/formacoes", (req, res) => {
   res.json(formacoes);
 });
 
 // Rota para obter detalhes de uma formação específica
-app.get("/formacoes/:id", (req: Request, res: Response) => {
+app.get("/formacoes/:id", (req, res) => {
   const idFormacao = req.params.id;
   const formacao = formacoes.find((form) => form.id === idFormacao);
 
@@ -139,12 +138,12 @@ app.get("/formacoes/:id", (req: Request, res: Response) => {
 });
 
 // Rota para obter todas os idiomas
-app.get("/idiomas", (req: Request, res: Response) => {
+app.get("/idiomas", (req, res) => {
   res.json(idiomas);
 });
 
 // Rota para obter detalhes de um idioma específico
-app.get("/idiomas/:id", (req: Request, res: Response) => {
+app.get("/idiomas/:id", (req, res) => {
   const idIdioma = req.params.id;
   const idioma = idiomas.find((i) => i.id === idIdioma);
 

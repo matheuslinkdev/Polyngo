@@ -2,14 +2,16 @@
   "version": 2,
   "builds": [
     {
-      "src": "index.ts",
+      "src": "index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
-    { "src": "/idiomas", "dest": "index.ts" },
-    { "src": "/formacoes", "dest": "index.ts" },
-    { "src": "/idiomas/(.*)", "dest": "index.ts" },
-    { "src": "/formacoes/(.*)", "dest": "index.ts" }
+    { "src": "/idiomas", "dest": "index.js" },
+    { "src": "/formacoes", "dest": "index.js" },
+    { "src": "/idiomas/(.*)", "dest": "index.js" },
+    { "src": "/login", "dest": "index.js" },
+    { "src": "/signup", "dest": "index.js" },
+    { "src": "/users/(.*)", "dest": "index.js" }
   ]
 }

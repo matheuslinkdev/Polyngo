@@ -1,13 +1,4 @@
-// formacoes.ts
-
-export interface FormacaoProps {
-  id: string;
-  nome: string;
-  descricao: string;
-  duracaoEmMeses: number;
-}
-
-export const formacoes: FormacaoProps[] = [
+export const formacoes = [
   {
     id: "formacaobasica",
     nome: "Formação Básica",

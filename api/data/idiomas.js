@@ -1,14 +1,4 @@
-// idiomas.ts
-
-export interface IdiomaProps {
-  id: string;
-  nome: string;
-  descricao: string;
-  urlBandeira: string;
-  alt: string;
-}
-
-export const idiomas: IdiomaProps[] = [
+export const idiomas = [
   {
     id: "ingles",
     nome: "Inglês",
