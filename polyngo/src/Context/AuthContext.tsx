@@ -1,3 +1,4 @@
+// AuthContext.tsx
 import React, {
   createContext,
   useState,
@@ -7,10 +8,12 @@ import React, {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContextProps, UserProps } from "../../types/global-types";
+import axios from "axios";
 
 // Create the context
 export const AuthContext = createContext<AuthContextProps>({
   logout: () => {},
+  deleteAccount: () => {},
   isAuthenticated: false,
   setIsAuthenticated: () => {},
   user: null,
@@ -37,6 +40,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
+      console.log(user);
     } else {
       localStorage.removeItem("user");
     }
@@ -51,9 +55,27 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     navigate("/");
   };
 
+  const deleteAccount = async () => {
+    if (user) {
+      try {
+        await axios.delete(`http://localhost:5000/users/${user.email}`);
+        logout();
+      } catch (error) {
+        console.error("Failed to delete account", error);
+      }
+    }
+  };
+
   return (
     <AuthContext.Provider
-      value={{ logout, isAuthenticated, setIsAuthenticated, user, setUser }}
+      value={{
+        logout,
+        deleteAccount,
+        isAuthenticated,
+        setIsAuthenticated,
+        user,
+        setUser,
+      }}
     >
       {children}
     </AuthContext.Provider>

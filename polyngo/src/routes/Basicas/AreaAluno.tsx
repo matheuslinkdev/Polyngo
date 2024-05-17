@@ -2,6 +2,7 @@ import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import { UseAuth } from "../../Context/AuthContext";
 import { Navigate } from "react-router-dom";
 import EmAndamento from "../../Components/User/EmAndamento";
+import DeleteAccountButton from "../../Components/User/DeleteAccButton";
 
 const AreaAluno = () => {
   const { isAuthenticated, user } = UseAuth();
@@ -30,6 +31,7 @@ const AreaAluno = () => {
         </Box>
         <EmAndamento />
       </Center>
+      <DeleteAccountButton/>
     </Flex>
   );
 };

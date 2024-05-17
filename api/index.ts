@@ -1,4 +1,3 @@
-// index.ts
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -26,7 +25,7 @@ app.get("/", (req: Request, res: Response) => {
   );
 });
 
-// REGISTER & LOGIN // !!!!!!!!!!!!!!!!!!
+// REGISTER & LOGIN
 
 app.post("/signup", async (req, res) => {
   const { email, password } = req.body;
@@ -42,8 +41,8 @@ app.post("/signup", async (req, res) => {
     if (check) {
       res.json("exist");
     } else {
-      res.json("notexist");
       await UserModel.insertMany([data]);
+      res.json("notexist");
     }
   } catch (e) {
     res.json("fail");
@@ -61,7 +60,7 @@ app.post("/login", async (req, res) => {
         .json({ error: "notexist", message: "Usuário não está cadastrado." });
     }
 
-    const isPasswordCorrect = user.password === password; 
+    const isPasswordCorrect = user.password === password;
     if (!isPasswordCorrect) {
       return res
         .status(401)
@@ -74,11 +73,53 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.get("/users", async (req, res) => {
+  try {
+    const users = await UserModel.find({});
+    res.send(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "fail", message: "Erro no servidor." });
+  }
+});
+
+app.get("/users/:email", async (req, res) => {
+  const userEmail = req.params.email;
+
+  try {
+    const user = await UserModel.findOne({ email: userEmail });
+    if (!user) {
+      return res
+        .status(404)
+        .json({ error: "notexist", message: "Usuário não está cadastrado." });
+    }
+
+    res.json(user);
+  } catch (e) {
+    res.status(500).json({ error: "fail", message: "Erro no servidor." });
+  }
+});
+
+app.delete("/users/:email", async (req, res) => {
+  const userEmail = req.params.email;
+
+  try {
+    const user = await UserModel.findOneAndDelete({ email: userEmail });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ message: "User deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "fail", message: "Erro no servidor" });
+  }
+});
 
 app.get("/register", (req, res) => {
   res.send("Pagina de registro");
 });
-///////////
 
 // Rota para obter todas as formações
 app.get("/formacoes", (req: Request, res: Response) => {
