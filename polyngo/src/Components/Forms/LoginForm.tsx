@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import {
   Button,
   FormControl,
@@ -14,16 +14,16 @@ import {
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../../Context/AuthContext";
+import { UseAuth } from "../../Context/AuthContext";
 
-const LoginForm: React.FC = () => {
+const LoginForm = () => {
   const [isHidden, setIsHidden] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
-  const { setIsAuthenticated, setUser } = useAuth();
+  const { setIsAuthenticated, setUser } = UseAuth();
 
   async function submitLogin(e: FormEvent) {
     e.preventDefault();
@@ -39,10 +39,14 @@ const LoginForm: React.FC = () => {
         setIsAuthenticated(true);
         setUser({ email, password });
         navigate("/areadoaluno", { state: { id: email } });
+      } else {
+        setErrorMessage("Invalid login response.");
       }
     } catch (error) {
-      if (error.response) {
-        setErrorMessage(error.response.data.message);
+      if (axios.isAxiosError(error)) {
+        setErrorMessage(
+          error.response?.data.message || "Erro desconhecido do servidor."
+        );
       } else {
         setErrorMessage("Erro de rede. Tente novamente.");
       }

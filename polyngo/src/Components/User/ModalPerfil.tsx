@@ -16,7 +16,7 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { AiOutlineUser } from "react-icons/ai";
-import { useAuth } from "../../Context/AuthContext";
+import { UseAuth } from "../../Context/AuthContext";
 import { FaBuildingColumns, FaHeadset, FaNetworkWired } from "react-icons/fa6";
 
 const modalLinks = [
@@ -35,7 +35,7 @@ const modalLinks = [
 ];
 
 const ModalPerfil = () => {
-  const { logout, user } = useAuth();
+  const { logout, user } = UseAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -67,8 +67,8 @@ const ModalPerfil = () => {
             <Text>
               Como estão suas aulas ? Lembre-Se de entregar suas atividades
               dentro dos prazos estabelecidos e não pare ! Estamos aqui para te
-              ajudar a desbravar o mundo !
-              Abaixo você pode consultar os principais serviços que você pode precisar: 
+              ajudar a desbravar o mundo ! Abaixo você pode consultar os
+              principais serviços que você pode precisar:
             </Text>
           </ModalBody>
           <Divider />

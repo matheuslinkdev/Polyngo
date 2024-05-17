@@ -4,11 +4,11 @@ import { useState } from "react";
 import { getLinks } from "./data";
 import { Link } from "react-router-dom";
 import UserButtons from "../../Buttons/UserButtons";
-import { useAuth } from "../../../Context/AuthContext";
+import { UseAuth } from "../../../Context/AuthContext";
 import ModalPerfil from "../../User/ModalPerfil";
 
 const Header = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = UseAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const links = getLinks(); // Call getLinks to get the array of links
 

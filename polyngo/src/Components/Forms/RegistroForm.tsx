@@ -7,11 +7,12 @@ import {
   InputGroup,
   InputRightElement,
   Text,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
-import { useState, useContext } from "react";
+import { FormEvent, useState } from "react";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 
 const RegistroForm = () => {
@@ -19,31 +20,33 @@ const RegistroForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  async function submitRegistro(e) {
+  async function submitRegistro(e: FormEvent) {
     e.preventDefault();
 
+    // Check for empty fields
+    if (!name || !email || !password) {
+      setErrorMessage("Todos os campos são obrigatórios");
+      return;
+    }
+
     try {
-      await axios
-        .post("http://localhost:5000/signup", {
-          email,
-          password,
-          name
-        })
-        .then((res) => {
-          if (res.data == "exist") {
-            alert("User already exists");
-          } else if (res.data == "notexist") {
-            navigate("/login", { state: { id: email } });
-          }
-        })
-        .catch((e) => {
-          alert("wrong details");
-          console.log(e);
-        });
+      const res = await axios.post("http://localhost:5000/signup", {
+        email,
+        password,
+        name,
+      });
+
+      if (res.data === "exist") {
+        setErrorMessage("Usuário já existe");
+      } else if (res.data === "notexist") {
+        navigate("/login", { state: { id: email } });
+      }
     } catch (e) {
+      setErrorMessage("Detalhes incorretos");
       console.log(e);
     }
   }
@@ -92,6 +95,12 @@ const RegistroForm = () => {
             />
           </InputRightElement>
         </InputGroup>
+        {errorMessage && (
+          <Alert status="error" mt={4} bgColor="red">
+            <AlertIcon />
+            {errorMessage}
+          </Alert>
+        )}
         <Text mt={5}>
           Já possui uma conta?{" "}
           <Link

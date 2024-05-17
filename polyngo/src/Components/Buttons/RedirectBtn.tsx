@@ -1,12 +1,8 @@
 import { Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { RedirectBtnProps } from "../../../types/global-types";
 
-interface Props {
-  label: string;
-  path: string;
-}
-
-const RedirectBtn = ({ label, path }: Props) => {
+const RedirectBtn = ({ label, path }: RedirectBtnProps) => {
   return (
     <Link to={path}>
       <Button

@@ -1,14 +1,12 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+  ReactNode,
+} from "react";
 import { useNavigate } from "react-router-dom";
-
-// Define the shape of the context
-interface AuthContextProps {
-  logout: () => void;
-  isAuthenticated: boolean;
-  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-  user: any;
-  setUser: React.Dispatch<React.SetStateAction<any>>;
-}
+import { AuthContextProps, UserProps } from "../../types/global-types";
 
 // Create the context
 export const AuthContext = createContext<AuthContextProps>({
@@ -20,11 +18,15 @@ export const AuthContext = createContext<AuthContextProps>({
 });
 
 // Custom hook to use the context
-export const useAuth = () => useContext(AuthContext);
+export const UseAuth = () => useContext(AuthContext);
+
+interface AuthProviderProps {
+  children: ReactNode;
+}
 
 // AuthProvider component
-export const AuthProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<any>(
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const [user, setUser] = useState<UserProps | null>(
     JSON.parse(localStorage.getItem("user") || "null")
   );
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
