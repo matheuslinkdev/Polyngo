@@ -12,7 +12,19 @@ const CONNECTION_STRING = process.env.DB_CONNECTION_STRING
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+// Configuração do CORS
+const allowedOrigins = ['https://polyngo-xi.vercel.app'];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: 'GET, POST, PUT, DELETE, OPTIONS',
+  allowedHeaders: 'X-Requested-With, Content-Type, Authorization'
+}));
 mongoose.connect(
   CONNECTION_STRING
 );
