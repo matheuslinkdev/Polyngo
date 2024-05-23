@@ -1,4 +1,3 @@
-// AuthContext.tsx
 import React, {
   createContext,
   useState,
@@ -10,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { AuthContextProps, UserProps } from "../../types/global-types";
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 // Create the context
 export const AuthContext = createContext<AuthContextProps>({
   logout: () => {},
@@ -18,6 +19,7 @@ export const AuthContext = createContext<AuthContextProps>({
   setIsAuthenticated: () => {},
   user: null,
   setUser: () => {},
+  BASE_URL
 });
 
 // Custom hook to use the context
@@ -40,7 +42,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
-      console.log(user);
     } else {
       localStorage.removeItem("user");
     }
@@ -58,7 +59,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const deleteAccount = async () => {
     if (user) {
       try {
-        await axios.delete(`http://localhost:5000/users/${user.email}`);
+        await axios.delete(`${BASE_URL}/users/${user.email}`);
         logout();
       } catch (error) {
         console.error("Failed to delete account", error);
@@ -75,6 +76,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setIsAuthenticated,
         user,
         setUser,
+        BASE_URL
       }}
     >
       {children}

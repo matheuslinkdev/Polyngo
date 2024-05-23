@@ -37,6 +37,7 @@ export interface AuthContextProps {
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
   user: UserProps | null;
   setUser: React.Dispatch<React.SetStateAction<UserProps | null>>;
+BASE_URL: string
 }
 
 export interface RedirectBtnProps {

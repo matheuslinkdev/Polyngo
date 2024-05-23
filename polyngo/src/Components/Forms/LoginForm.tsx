@@ -23,35 +23,36 @@ const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
-  const { setIsAuthenticated, setUser } = UseAuth();
+  const { setIsAuthenticated, setUser, BASE_URL } = UseAuth();
 
-  async function submitLogin(e: FormEvent) {
-    e.preventDefault();
+ async function submitLogin(e: FormEvent) {
+   e.preventDefault();
 
-    try {
-      const res = await axios.post("http://localhost:5000/login", {
-        email,
-        password,
-      });
+   try {
+     const res = await axios.post(`${BASE_URL}/login`, {
+       email,
+       password,
+     });
 
-      if (res.data === "exist") {
-        setErrorMessage("");
-        setIsAuthenticated(true);
-        setUser({ email, password });
-        navigate("/areadoaluno", { state: { id: email } });
-      } else {
-        setErrorMessage("Invalid login response.");
-      }
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        setErrorMessage(
-          error.response?.data.message || "Erro desconhecido do servidor."
-        );
-      } else {
-        setErrorMessage("Erro de rede. Tente novamente.");
-      }
-    }
-  }
+     if (res.data === "exist") {
+       setErrorMessage("");
+       setIsAuthenticated(true);
+       // Aqui você pode adicionar uma propriedade `id` ao objeto `User`
+       setUser({ id: email, email, password });
+       navigate("/areadoaluno", { state: { id: email } });
+     } else {
+       setErrorMessage("Invalid login response.");
+     }
+   } catch (error) {
+     if (axios.isAxiosError(error)) {
+       setErrorMessage(
+         error.response?.data.message || "Erro desconhecido do servidor."
+       );
+     } else {
+       setErrorMessage("Erro de rede. Tente novamente.");
+     }
+   }
+ }
 
   return (
     <form onSubmit={submitLogin}>

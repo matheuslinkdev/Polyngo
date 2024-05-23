@@ -14,6 +14,7 @@ import { FormEvent, useState } from "react";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { UseAuth } from "../../Context/AuthContext";
 
 const RegistroForm = () => {
   const [isHidden, setIsHidden] = useState(true);
@@ -21,6 +22,8 @@ const RegistroForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const { BASE_URL } = UseAuth()
 
   const navigate = useNavigate();
 
@@ -34,7 +37,7 @@ const RegistroForm = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/signup", {
+      const res = await axios.post(`${BASE_URL}/signup`, {
         email,
         password,
         name,

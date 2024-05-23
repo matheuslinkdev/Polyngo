@@ -13,7 +13,6 @@ const CardsFormacoes = () => {
       try {
         const dadosObtidos = await fetchFormacoes();
         setDados(dadosObtidos);
-        console.log(dadosObtidos);
       } catch (error) {
         console.error("Erro ao buscar os dados:");
       }
