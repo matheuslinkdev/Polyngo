@@ -23,7 +23,7 @@ const RegistroForm = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { BASE_URL } = UseAuth()
+  const { BASE_URL } = UseAuth();
 
   const navigate = useNavigate();
 
@@ -32,7 +32,12 @@ const RegistroForm = () => {
 
     // Check for empty fields
     if (!name || !email || !password) {
-      setErrorMessage("Todos os campos são obrigatórios");
+      setErrorMessage("Todos os campos são obrigatórios!");
+      return;
+    }
+
+    if (password.length < 8) {
+      setErrorMessage("A senha deve conter pelo menos 8 caracteres!");
       return;
     }
 
@@ -44,12 +49,12 @@ const RegistroForm = () => {
       });
 
       if (res.data === "exist") {
-        setErrorMessage("Usuário já existe");
+        setErrorMessage("Usuário já existe!");
       } else if (res.data === "notexist") {
         navigate("/login", { state: { id: email } });
       }
     } catch (e) {
-      setErrorMessage("Detalhes incorretos");
+      setErrorMessage("Detalhes incorretos!");
       console.log(e);
     }
   }

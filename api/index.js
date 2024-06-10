@@ -13,18 +13,17 @@ const CONNECTION_STRING = process.env.DB_CONNECTION_STRING
 const app = express();
 app.use(express.json());
 // Configuração do CORS
-const allowedOrigins = ['https://polyngo-xi.vercel.app'];
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: 'GET, POST, PUT, DELETE, OPTIONS',
-  allowedHeaders: 'X-Requested-With, Content-Type, Authorization'
-}));
+const allowedOrigins = [
+  "https://polyngo-xi.vercel.app",
+  "https://polyngo-xi.vercel.app/idiomas",
+  "https://polyngo-xi.vercel.app/formacoes",
+  "https://polyngo-xi.vercel.app/login",
+  "https://polyngo-xi.vercel.app/register",
+  "https://polyngo-xi.vercel.app/signup",
+  "https://polyngo-xi.vercel.app/users",
+];
+app.use(cors({ origin: true, credentials: true }));
+
 mongoose.connect(
   CONNECTION_STRING
 );
